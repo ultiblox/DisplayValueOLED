@@ -1,10 +1,13 @@
-#include "LCD1602Display.h"
+#include "DisplayValueOLED.h"
 
-LCD1602Display display(0x27, 16, 2);
+DisplayValueOLED display;
 
 void setup() {
-    display.init();
-    display.setLabel("Sensor Reading");
+  display.setLabelFont(u8x8_font_chroma48medium8_r)
+           .setValueFont(u8x8_font_inb33_3x6_n)
+           .init();
+
+  display.setLabel("Sensor Reading"); 
 }
 
 void loop() {
