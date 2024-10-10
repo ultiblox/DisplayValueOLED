@@ -55,6 +55,7 @@ void DisplayValueOLED::setLabel(const __FlashStringHelper* value) {
 
 void DisplayValueOLED::setValue(const char* value) {
     if (value == nullptr) return;
+
     char fullValue[40];
     snprintf(fullValue, sizeof(fullValue), "%s%s", value, suffix);
 
@@ -67,16 +68,23 @@ void DisplayValueOLED::setValue(const char* value) {
     Serial.println(fullValue);
 
     if (strcmp(lastValue, fullValue) != 0) {
+        // Clear the entire line to avoid leftover characters from a longer previous value
         u8x8.clearLine(1);
+        
+        // Optionally fill with spaces to ensure complete overwrite of the previous value
+        u8x8.drawString(0, 1, "                ");  // Fill with spaces to fully clear
+
+        // Store the new value
         strncpy(lastValue, fullValue, sizeof(lastValue) - 1);
         lastValue[sizeof(lastValue) - 1] = '\0';
 
+        // Set the font and print the new value
         u8x8.setFont(valueFont);
         int centerPos = calculateCenterPosition(fullValue, valueFont);
         u8x8.drawString(centerPos, 1, fullValue);
-        
     }
 }
+
 
 void DisplayValueOLED::setValue(int value) {
     char valueStr[16];  // Adjust buffer size as needed
