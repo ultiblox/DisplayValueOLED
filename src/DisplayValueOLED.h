@@ -15,7 +15,7 @@ private:
     char lastValue[32];   // Fixed-size buffer for the value
     char suffix[8];       // Buffer for the suffix
     const uint8_t* labelFont = u8x8_font_chroma48medium8_r;  // Default font for labels
-    const uint8_t* valueFont = u8x8_font_chroma48medium8_r;  // Default font for values
+    const uint8_t* valueFont = u8x8_font_inb33_3x6_r;  // Default font for values
 
 public:
     DisplayValueOLED();
