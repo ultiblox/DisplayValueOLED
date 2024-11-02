@@ -29,4 +29,4 @@ Refer to `examples/hello-world/hello-world.ino` for a full usage example.
 - Arduino Core Library
 
 ## License
-This library is open source, distributed under the MIT License.
+[This project is licensed under the UltiBlox License.](https://ultiblox.org/license)
