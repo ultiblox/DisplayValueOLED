@@ -24,3 +24,11 @@ fi
 
 # Verify the installation
 arduino-cli version
+
+# Install the Arduino AVR Core
+arduino-cli core update-index
+arduino-cli core install arduino:avr || {
+    echo "Error: Failed to install arduino:avr core."
+    exit 1
+}
+
