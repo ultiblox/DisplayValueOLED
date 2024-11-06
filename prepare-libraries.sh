@@ -16,7 +16,6 @@ install_library() {
 
 # Install necessary libraries for DisplayValueOLED
 arduino-cli lib install "U8g2"  # U8x8lib.h is part of the U8g2 library
-install_library "DisplayValueCommon" "https://github.com/makers-multiverse/DisplayValueCommon.git"
 
 # Finish
 echo "Library preparation complete."
