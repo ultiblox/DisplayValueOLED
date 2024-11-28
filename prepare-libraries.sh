@@ -19,11 +19,22 @@ while IFS=',' read -r DEP_NAME GIT_URL || [ -n "$DEP_NAME" ]; do
   GIT_URL=$(echo "${GIT_URL}" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//')
 
   # Skip empty lines
-  if [[ -z "$DEP_NAME" || -z "$GIT_URL" ]]; then
+  if [[ -z "$DEP_NAME" ]]; then
     echo "Skipping empty or invalid line"
     continue
   fi
 
+  if [[ -z "$GIT_URL" ]]; then
+    # Install via Arduino CLI
+    echo "Installing Arduino library: $DEP_NAME using Arduino CLI..."
+    arduino-cli lib install "$DEP_NAME" || {
+      echo "Error: Failed to install Arduino library $DEP_NAME"
+      continue
+    }
+    continue
+  fi
+
+  # Clone Git-based dependencies
   echo "Processing dependency: DEP_NAME=${DEP_NAME}, GIT_URL=${GIT_URL}"
 
   DEP_PATH="${PARENT_DIR}/${DEP_NAME}"
